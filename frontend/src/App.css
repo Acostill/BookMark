@@ -1,5 +1,15 @@
+#nav {
+  background-color: black;
+}
+#nav > h1 {
+  margin: 0;
+  padding: .4em;
+}
+
 .App {
   text-align: center;
+  height: 100%;
+  color: white;
 }
 
 .App-logo {
