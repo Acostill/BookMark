@@ -9,62 +9,72 @@ const hasGenre = (arr, id) => {
   return false;
 }
 
-const isAnime = obj => {
-  let isAnimation = (obj.genre_ids 
-    ? obj.genre_ids.includes(16) 
-    : hasGenre(obj.genres, 16)
-  );
+const isAnime = series => series.genre_ids.includes(16) && series.original_language === 'ja';
 
-  return isAnimation && obj.original_language === 'ja';
-}
-
-const tvDetails = (req, res, next) => {
+const seriesDetails = (req, res, next) => {
   let id = req.params.id;
   axios
   .get(`https://api.themoviedb.org/3/tv/${id}?api_key=${theMovieDb.key}&append_to_response=keywords&language=en-US`)
   .then(response => {
-    let code = isAnime(response.data) ? 204 : 200;
+    let series = {
+      title: response.data.name,
+      description: response.data.overview,
+      genre_ids: response.data.genres.map(genre => genre.id),
+      ...response.data
+    }
 
-    res.status(code).send(response.data);    
+    let code = isAnime(series) ? 204 : 200;
+    res.status(code).json(series);
   })
-  .catch(e => res.status(500).send(e.message));
+  .catch(e => res.status(500).json(e.message));
 }
 
-const aniDetails = (req, res, next) => {
+const animeDetails = (req, res, next) => {
   let id = req.params.id;
   axios
   .get(`https://api.themoviedb.org/3/tv/${id}?api_key=${theMovieDb.key}&append_to_response=keywords&language=en-US`)
   .then(response => {
-    let code = isAnime(response.data) ? 200 : 204;
+    let anime = {
+      title: anime.name,
+      description: anime.overview,
+      ...anime
+    }
+    let code = isAnime(anime) ? 200 : 204;
 
-    res.status(code).send(response.data);    
+    res.status(code).json();    
   })
-  .catch(e => res.status(500).send(e.message));
+  .catch(e => res.status(500).json(e.message));
 }
 
 const movieDetails = (req, res, next) => {
   let id = req.params.id;
   axios
   .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${theMovieDb.key}&append_to_response=keywords&language=en-US`)
-  .then(response => res.status(200).send(response.data))
-  .catch(e => res.status(500).send(e.message));
+  .then(response => res.status(200).json(response.data))
+  .catch(e => res.status(500).json(e.message));
 }
 
-const tvSearch = (req, res, next) => {
+const seriesSearch = (req, res, next) => {
   let query = req.params.query;
   
   axios
     .get(`https://api.themoviedb.org/3/search/tv?api_key=${theMovieDb.key}&language=en-US&query=${query}&page=1`)
     .then(response => {
       //filter out anime series
-      response.data.results = response.data.results.filter(result => !isAnime(result));
-      
-      res.status(200).send(response.data);
+      let seriesList = response.data.results.filter(result => !isAnime(result));
+      seriesList = seriesList.map(series => {
+        return { 
+          title: series.name, 
+          description: series.overview,
+          ...series
+        }
+      })
+      res.status(200).json(seriesList);
     })
-  .catch(e => res.status(500).send(e.message));
+  .catch(e => res.status(500).json(e.message));
 }
 
-const aniSearch = (req, res, next) => {
+const animeSearch = (req, res, next) => {
   let query = req.params.query;
   axios
     .get(`https://api.themoviedb.org/3/search/tv?api_key=${theMovieDb.key}&language=en-US&query=${query}&page=1`)
@@ -72,7 +82,7 @@ const aniSearch = (req, res, next) => {
     //filter out non-anime series
       response.data.results = response.data.results.filter(result => isAnime(result));
 
-      res.status(200).send(response.data);
+      res.status(200).json(response.data);
   });
 }
 
@@ -84,15 +94,15 @@ const movieSearch = (req, res, next) => {
     //filter out anime movies      
       response.data.results = response.data.results.filter(result => !isAnime(result));
       
-      res.status(200).send(response.data);
+      res.status(200).json(response.data);
   });
 }
 
 module.exports = {
-  tvDetails,
-  aniDetails,
+  seriesDetails,
+  animeDetails,
   movieDetails,
-  tvSearch,
-  aniSearch,
+  seriesSearch,
+  animeSearch,
   movieSearch
 }
