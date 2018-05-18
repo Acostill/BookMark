@@ -11,7 +11,7 @@ class MoviePage extends Component {
     //Dark Knight 155
     let id = this.props.match.params.movie_id;
     axios
-      .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${tmdbKey}&language=en-US`)
+      .get(`/api/movie/details/${id}`)
       .then(res => {
         this.setState({
           movie: res.data
@@ -23,6 +23,7 @@ class MoviePage extends Component {
   }
   render() {
     const { movie } = this.state;
+
     return (
       <div>
         {

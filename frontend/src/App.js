@@ -3,6 +3,7 @@ import './App.css';
 import { Link, Switch, Route } from 'react-router-dom';
 import MovieRouter from './components/movie/MovieRouter';
 import TVRouter from './components/tv/TVRouter';
+import AnimeRouter from './components/anime/AnimeRouter';
 import BookRouter from './components/book/BookRouter';
 import NavBar from './NavBar';
 import Search from './components/Search';
@@ -16,6 +17,7 @@ class App extends Component {
         <Switch>
           <Route path='/movie' component={MovieRouter} />
           <Route path='/tv' component={TVRouter} />
+          <Route path='/ani' component={AnimeRouter} />
           <Route path='/book' component={BookRouter} />
         </Switch>
       </div>

@@ -1,5 +1,7 @@
 #nav {
   background-color: black;
+  box-shadow: 5px orange;
+  margin-bottom: 1em;
 }
 #nav > h1 {
   margin: 0;
