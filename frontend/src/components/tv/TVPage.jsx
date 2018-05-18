@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import config from '../../local/config';
+import TVDetails from './TVDetails';
 
-let tmdbKey = config.keys.tmdb;
 let tmdbUrl = 'https://image.tmdb.org/t/p';
 let size = '/w500';
 class TVPage extends Component {
-  state = { show: null }
-  getShow = () => {
+  state = { tv: null }
+  getTV = () => {
     //Westworld 63247
-    let id = this.props.match.params.show_id;
+    let id = this.props.match.params.tv_id;
     axios
-      .get(`https://api.themoviedb.org/3/tv/${id}?api_key=${tmdbKey}&language=en-US`)
+      .get(`/api/tv/details/${id}`)
       .then(res => {
         this.setState({
-          show: res.data
+          tv: res.data
         })
       })
   }
   componentDidMount() {
-    this.getShow();
+    this.getTV();
   }
   render() {
-    const { show } = this.state;
+    const { tv } = this.state;
     return (
       <div>
         {
-          show ?
-          <div>
-            <h2 style={{color: 'grey'}}>{show.title}</h2>
-            <img src={`${tmdbUrl}${size}${show.poster_path}`} alt='poster'/>
-            <p>{show.overview}</p>
-          </div>
+          tv ?
+          <TVDetails tv={tv} />
           : null
         }
       </div>

@@ -7,7 +7,7 @@ class BookPage extends Component {
     //Ender's Game WEW1cC7yaCQC
     let id = this.props.match.params.book_id;
     axios
-      .get(`https://www.googleapis.com/books/v1/volumes/${id}`)
+      .get(`/api/book/details/${id}`)
       .then(res => {
         this.setState({
           book: res.data
