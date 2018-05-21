@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 
-class TVCard extends Component {
+class SeriesCard extends Component {
 
   render() {
     const { media } = this.props;
 
     return (
       <div>
-        <Link to={`/tv/${media.id}`} >
+        <Link to={`/series/${media.id}`} >
           {media.name}
         </Link>
       </div>
@@ -17,4 +17,4 @@ class TVCard extends Component {
   }
 }
 
-export default TVCard;
+export default SeriesCard;
