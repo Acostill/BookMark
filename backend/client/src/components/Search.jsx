@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import MovieCard from './movie/MovieCard';
-import TVCard from './tv/TVCard';
+import SeriesCard from './series/SeriesCard';
 import AnimeCard from './anime/AnimeCard';
 import BookCard from './book/BookCard';
 
@@ -40,7 +40,7 @@ class Search extends Component {
             resultType: 'anime'
           })
         })
-    } else if (select === 'TV') {
+    } else if (select === 'Series') {
       //search TV
       axios
       .get(`/api/series/search/${input}`)
@@ -48,7 +48,7 @@ class Search extends Component {
         console.log(res);
         this.setState({
           results: res.data.results,
-          resultType: 'tv'
+          resultType: 'series'
         })
       })
     } else if (select === 'Movie') {
@@ -83,12 +83,12 @@ class Search extends Component {
           <option>Anime</option>
           <option>Book</option>
           <option>Movie</option>
-          <option>TV</option>
+          <option>Series</option>
         </select>
         <input placeholder='Search' value={this.state.input} onChange={this.handleInput} />
         <button onClick={this.handleSearch} >Search</button>
-        {resultType === 'tv' ? 
-          results.map(media => <TVCard media={media} />)
+        {resultType === 'series' ? 
+          results.map(media => <SeriesCard media={media} />)
           :
           resultType === 'movie' ?
             results.map(media => <MovieCard media={media} />)
