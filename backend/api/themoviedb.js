@@ -17,10 +17,10 @@ const seriesDetails = (req, res, next) => {
   .get(`https://api.themoviedb.org/3/tv/${id}?api_key=${theMovieDb.key}&append_to_response=keywords&language=en-US`)
   .then(response => {
     let series = {
+      ...response.data,
       title: response.data.name,
       description: response.data.overview,
-      genre_ids: response.data.genres.map(genre => genre.id),
-      ...response.data
+      genre_ids: response.data.genres.map(genre => genre.id)
     }
 
     let code = isAnime(series) ? 204 : 200;
@@ -35,13 +35,14 @@ const animeDetails = (req, res, next) => {
   .get(`https://api.themoviedb.org/3/tv/${id}?api_key=${theMovieDb.key}&append_to_response=keywords&language=en-US`)
   .then(response => {
     let anime = {
-      title: anime.name,
-      description: anime.overview,
-      ...anime
+      ...response.data,
+      title: response.data.name,
+      description: response.data.overview,
+      genre_ids: response.data.genres.map(genre => genre.id)
     }
     let code = isAnime(anime) ? 200 : 204;
 
-    res.status(code).json();    
+    res.status(code).json(anime);    
   })
   .catch(e => res.status(500).json(e.message));
 }
@@ -63,13 +64,16 @@ const seriesSearch = (req, res, next) => {
       //filter out anime series
       let seriesList = response.data.results.filter(result => !isAnime(result));
       seriesList = seriesList.map(series => {
-        return { 
-          title: series.name, 
-          description: series.overview,
-          ...series
+        return {
+          ...series,
+          title: series.name,
+          description: series.overview
         }
       })
-      res.status(200).json(seriesList);
+      res.status(200).json({
+        ...response.data,
+        results: seriesList
+      });
     })
   .catch(e => res.status(500).json(e.message));
 }
