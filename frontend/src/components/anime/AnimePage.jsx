@@ -7,9 +7,9 @@ class AnimePage extends Component {
   state = { anime: null }
   getAnime = () => {
     //Code Geass 31724
-    let id = this.props.match.params.ani_id;
+    let id = this.props.match.params.anime_id;
     axios
-      .get(`/api/ani/details/${id}`)
+      .get(`/api/anime/details/${id}`)
       .then(res => {
         this.setState({
           anime: res.data

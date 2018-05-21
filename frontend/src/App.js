@@ -16,8 +16,8 @@ class App extends Component {
         <Search />
         <Switch>
           <Route path='/movie' component={MovieRouter} />
-          <Route path='/tv' component={TVRouter} />
-          <Route path='/ani' component={AnimeRouter} />
+          <Route path='/series' component={TVRouter} />
+          <Route path='/anime' component={AnimeRouter} />
           <Route path='/book' component={BookRouter} />
         </Switch>
       </div>

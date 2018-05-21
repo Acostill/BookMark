@@ -6,7 +6,7 @@ class TVRouter extends Component {
   render() {
     return (
       <Switch>
-        <Route path='/tv/:tv_id' component={(props) => <TVPage {...props} />} />
+        <Route path='/series/:series_id' component={(props) => <TVPage {...props} />} />
       </Switch>
     )
   }

@@ -33,18 +33,19 @@ class Search extends Component {
     if (select === 'Anime') {
       //search Anime
       axios
-        .get(`/api/ani/search/${input}`)
+        .get(`/api/anime/search/${input}`)
         .then(res => {
           this.setState({
             results: res.data.results,
-            resultType: 'ani'
+            resultType: 'anime'
           })
         })
     } else if (select === 'TV') {
       //search TV
       axios
-      .get(`/api/tv/search/${input}`)
+      .get(`/api/series/search/${input}`)
       .then(res => {
+        console.log(res);
         this.setState({
           results: res.data.results,
           resultType: 'tv'
@@ -75,7 +76,7 @@ class Search extends Component {
 
   render() {
     const { results, resultType } = this.state;
-
+    console.log(this.state);
     return (
       <div>
         <select value={this.state.select} onChange={this.handleSelect} >
@@ -92,7 +93,7 @@ class Search extends Component {
           resultType === 'movie' ?
             results.map(media => <MovieCard media={media} />)
             :
-            resultType === 'ani' ?
+            resultType === 'anime' ?
               results.map(media => <AnimeCard media={media} />)
               :
               resultType === 'book' ?

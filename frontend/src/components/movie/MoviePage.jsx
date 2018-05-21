@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import config from '../../local/config';
 
-let tmdbKey = config.keys.tmdb;
 let tmdbUrl = 'https://image.tmdb.org/t/p';
 let size = '/w500';
 class MoviePage extends Component {

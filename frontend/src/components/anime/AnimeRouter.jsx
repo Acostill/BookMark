@@ -6,7 +6,7 @@ class AnimeRouter extends Component {
   render() {
     return (
       <Switch>
-        <Route path='/ani/:ani_id' component={(props) => <AnimePage {...props} />} />
+        <Route path='/anime/:anime_id' component={(props) => <AnimePage {...props} />} />
       </Switch>
     )
   }
