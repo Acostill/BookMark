@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bookmarkDb = require("../db/queries");
+const { loginRequired } = require("../auth/helpers");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+/* Get Requests */
+router.post('/register', bookmarkDb.authQueries.registerUser);
+router.post('/login', bookmarkDb.authQueries.loginUser);
+router.post('/logout', bookmarkDb.authQueries.logoutUser);
 
 module.exports = router;
