@@ -4,9 +4,11 @@ import MoviePage from './MoviePage';
 
 class MovieRouter extends Component {
   render() {
+    const { user } = this.props;
+    
     return (
       <Switch>
-        <Route path='/movie/:movie_id' component={(props) => <MoviePage {...props} />} />
+        <Route path='/movie/:movie_id' component={(props) => <MoviePage {...props} user={user} />} />
       </Switch>
     )
   }

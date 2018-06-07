@@ -4,9 +4,10 @@ import BookPage from './BookPage';
 
 class BookRouter extends Component {
   render() {
+    const { user } = this.props;
     return (
       <Switch>
-        <Route path='/book/:book_id' component={(props) => <BookPage {...props} />} />
+        <Route path='/book/:book_id' component={(props) => <BookPage {...props} user={user} />} />
       </Switch>
     )
   }

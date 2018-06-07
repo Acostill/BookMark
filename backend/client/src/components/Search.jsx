@@ -5,6 +5,9 @@ import MovieCard from './movie/MovieCard';
 import SeriesCard from './series/SeriesCard';
 import AnimeCard from './anime/AnimeCard';
 import BookCard from './book/BookCard';
+import SemanticSearch from './SemanticSearch';
+import CustomSearch from './CustomSearch';
+
 
 
 class Search extends Component {
@@ -12,7 +15,7 @@ class Search extends Component {
     super();
     this.state = {
       input: '',
-      select: 'Anime',
+      select: 'Series',
       results: [],
       resultType: null
     }
@@ -87,20 +90,23 @@ class Search extends Component {
         </select>
         <input placeholder='Search' value={this.state.input} onChange={this.handleInput} />
         <button onClick={this.handleSearch} >Search</button>
-        {resultType === 'series' ? 
-          results.map(media => <SeriesCard media={media} />)
-          :
-          resultType === 'movie' ?
-            results.map(media => <MovieCard media={media} />)
+
+        <div >
+          {resultType === 'series' ? 
+            results.map(media => <SeriesCard media={media} />)
             :
-            resultType === 'anime' ?
-              results.map(media => <AnimeCard media={media} />)
+            resultType === 'movie' ?
+              results.map(media => <MovieCard media={media} />)
               :
-              resultType === 'book' ?
-                results.map(media => <BookCard media={media} />)
+              resultType === 'anime' ?
+                results.map(media => <AnimeCard media={media} />)
                 :
-                null
-        }
+                resultType === 'book' ?
+                  results.map(media => <BookCard media={media} />)
+                  :
+                  null
+          }
+        </div>
       </div>
     )
   }

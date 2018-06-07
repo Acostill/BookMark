@@ -17,16 +17,34 @@ class SeriesPage extends Component {
         })
       })
   }
+  handleAdd = () => {
+    const { series } = this.state;
+    const { user } = this.props;
+
+    axios
+    .post('/users/series/add', 
+      {user_id: user.id, series_id: series.id, status: 'watch', progress: 0})
+    .then(() => {
+      window.alert('Success!');
+    })
+    .catch(err => {
+      this.setState({
+        err: err
+      })
+    })
+  }
   componentDidMount() {
+    window.scrollTo(0, 0);    
     this.getSeries();
   }
   render() {
+    const { handleAdd } = this;
     const { series } = this.state;
     return (
       <div>
         {
           series ?
-          <SeriesDetails series={series} />
+          <SeriesDetails series={series} handleAdd={handleAdd} />
           : null
         }
       </div>
