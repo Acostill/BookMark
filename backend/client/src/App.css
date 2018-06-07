@@ -1,0 +1,234 @@
+html {
+  background: rgb(32, 32, 32);
+}
+
+/* body {
+  background: linear-gradient(to bottom right, #343434, #414141, #343434);
+} */
+a {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+}
+
+.App {
+  height: 100%;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+.content {
+  padding-top: 4%;
+  background: linear-gradient(to bottom right, #343434, #414141, #343434);  
+  padding-left: 60px;
+  padding-right: 60px;
+  min-height: 75vh;
+  padding-bottom: 4%;
+}
+.backdrop {
+  position: absolute;
+  background-image: url('./images/collage.jpg');
+  background-size: 100vw;
+  /* background-repeat: no-repeat; */
+  left: 0;
+  top: 80px;
+  width: 100vw;
+  height: 100%;
+  padding-top: 50px;
+}
+.auth-container {
+  margin: 0 auto;
+  background: linear-gradient(to bottom right, #fff, #fff, #808080);
+  color: black;
+  width: 400px;
+  text-align: center;
+  padding: 25px;
+  border-radius: 20px;
+}
+.auth-box> form > label {
+  display: block;
+}
+.tab-links {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+}
+.sm-results {
+  position: absolute;
+  overflow: scroll;
+  width: 200px;
+  max-height: 500px;
+  background: green;
+  padding: 15px;
+}
+.SeriesCard {
+  display: flex;
+  margin: auto;
+  margin-top: 15px;
+  background-color: white;
+  color: black;
+  width: 483px;
+  height: 278px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+.SeriesCard > img {
+  position: absolute;
+  width: 185px;
+  height: 278px;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+
+.no-image {
+  position: absolute;
+  width: 185px;
+  height: 278px;
+  background: url('https://media.immediate.co.uk/volatile/sites/3/2017/11/imagenotavailable1-39de324.png');
+  background-position: right -110px bottom 10px;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+.SeriesCard > div {
+  margin-left: 187px;
+  padding: 16px;
+}
+.SeriesCard > div > a > h3 {
+  position: absolute;
+  margin: 0;
+  background-color: white;
+  width: 200px;
+  height: 42px;
+  overflow: hidden;
+}
+.SeriesCard > div > div {
+  margin-top: 18%;
+  height: 81%;
+  overflow: scroll;
+}
+
+.SingleItem {
+  display: flex;
+  background-color: white;
+  color: black;
+  margin-bottom: 5px;
+  align-self: center;
+  width: 80%;
+  height: 90px;
+  
+}
+.SingleItem > div {
+  display: flex;
+  align-self: center;
+  align-items: center;
+}
+.SingleItem > div > div {
+  margin-left: 30px;
+  font-size: 20px;
+}
+.SingleItem > div > div > input {
+  color: darkgreen;
+}
+.white-link {
+  color: white;
+}
+.status {
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  color: white;
+  height: 35px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 7px;
+}
+.progressbar-container {
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.list-img {
+  height: 90px;
+  width: 60px;
+  background-color: grey;
+}
+.media-details > .header {
+  background: white;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  opacity: .5;
+  color: black;
+  margin-left: -60px;
+  margin-right: -60px;
+  margin-top: -50px;
+  height: 350px;
+}
+.media-details > .media-body {
+  padding-left: 270px;
+}
+.detail-img {
+  position: absolute;
+  height: 350px;
+  top: 275px;
+}
+.detail-btn {
+  position: absolute;
+  /* height: 350px; */
+  top: 650px;
+  left: 150px;
+}
+#nav {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to bottom right, rgb(20, 20, 20), rgb(49, 49, 49));
+  padding-left: 60px;
+  padding-right: 60px;
+  z-index: 99;
+}
+#nav > div {
+  display: flex;
+  align-items: center;
+  z-index: inherit;
+}
+#nav > .left {
+  justify-content: flex-start;
+  z-index: inherit;
+  
+}
+#nav > .right {
+  display: flex;
+  width: 150px;
+  justify-content: space-between;
+  z-index: inherit;
+  
+}
+#logo {
+  font-size: 40px;
+  margin-right: 8px;
+}
+
+#home-backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 90vh;
+  left: 0;
+  top: 80px;
+  /* z-index: -1; */
+}
+
+#footer {
+  position: relative;
+  bottom: 0;
+  background: linear-gradient(to bottom right, rgb(20, 20, 20), rgb(49, 49, 49));
+  /* margin-top: 4%; */
+  width: 100%;
+  height: 100px;
+}
