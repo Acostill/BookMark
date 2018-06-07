@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AnimeDetails from './AnimeDetails';
 
 let tmdbUrl = 'https://image.tmdb.org/t/p';
 let size = '/w500';
@@ -16,21 +17,33 @@ class AnimePage extends Component {
         })
       })
   }
+  handleAdd = () => {
+    const { anime } = this.state;
+    const { user } = this.props;
+
+    axios
+    .post('/users/anime/add', 
+      {user_id: user.id, media_id: anime.id, status: 'watch', progress: 0})
+    .then(() => {
+      window.alert('Success!');
+    })
+    .catch(err => {
+      this.setState({
+        err: err
+      })
+    })
+  }
   componentDidMount() {
     this.getAnime();
   }
   render() {
     const { anime } = this.state;
-
+    const { handleAdd } = this;
     return (
       <div>
         {
-          anime ?
-          <div>
-            <h2 style={{color: 'grey'}}>{anime.title}</h2>
-            <img src={`${tmdbUrl}${size}${anime.poster_path}`} alt='poster'/>
-            <p>{anime.overview}</p>
-          </div>
+          anime 
+          ? <AnimeDetails media={anime} handleAdd={handleAdd} />
           : null
         }
       </div>

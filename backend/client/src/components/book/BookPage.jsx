@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import BookDetails from './BookDetails';
 
 class BookPage extends Component {
   state = { book: null }
@@ -14,20 +15,34 @@ class BookPage extends Component {
         })
       })
   }
+  handleAdd = () => {
+    const { book } = this.state;
+    const { user } = this.props;
+
+    axios
+    .post('/users/book/add', 
+      {user_id: user.id, media_id: book.id, status: 'watch', progress: 0})
+    .then(() => {
+      window.alert('Success!');
+    })
+    .catch(err => {
+      this.setState({
+        err: err
+      })
+    })
+  }
   componentDidMount() {
     this.getBook();
   }
   render() {
     const { book } = this.state;
+    const { handleAdd } = this;
+
     return (
       <div>
         {
-          book ?
-          <div>
-            <h2 style={{color: 'grey'}}>{book.volumeInfo.title}</h2>
-            <img src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.small : null} />
-            <p>{book.volumeInfo.description}</p>
-          </div>
+          book 
+          ? <BookDetails media={book} handleAdd={handleAdd} />
           : null
         }
       </div>

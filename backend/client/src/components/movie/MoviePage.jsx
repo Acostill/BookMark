@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import MovieDetails from './MovieDetails';
 
 let tmdbUrl = 'https://image.tmdb.org/t/p';
 let size = '/w500';
@@ -16,21 +17,34 @@ class MoviePage extends Component {
         })
       })
   }
+  handleAdd = () => {
+    const { movie } = this.state;
+    const { user } = this.props;
+
+    axios
+    .post('/users/movie/add', 
+      {user_id: user.id, media_id: movie.id, status: 'watch', progress: 0})
+    .then(() => {
+      window.alert('Success!');
+    })
+    .catch(err => {
+      this.setState({
+        err: err
+      })
+    })
+  }
   componentDidMount() {
     this.getMovie();
   }
   render() {
     const { movie } = this.state;
+    const { handleAdd } = this;
 
     return (
       <div>
         {
           movie ?
-          <div>
-            <h2 style={{color: 'grey'}}>{movie.title}</h2>
-            <img src={`${tmdbUrl}${size}${movie.poster_path}`} alt='poster'/>
-            <p>{movie.overview}</p>
-          </div>
+          <MovieDetails media={movie} handleAdd={handleAdd} />
           : null
         }
       </div>

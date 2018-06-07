@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 
-class SeriesCard extends Component {
+class SeriesResult extends Component {
 
   render() {
     let tmdbUrl = 'https://image.tmdb.org/t/p';
@@ -10,12 +10,8 @@ class SeriesCard extends Component {
     const { media } = this.props;
 
     return (
-      <div className='SeriesCard' >
-        {
-          media.poster_path
-           ? <img src={`${tmdbUrl}${size}${media.poster_path}`} alt='poster'/>
-           : <span className='no-image' ></span>
-        }
+      <div className='SeriesResult' >
+        <img src={`${tmdbUrl}${size}${media.poster_path}`} alt='poster'/>
         <div>
           <Link to={`/series/${media.id}`} >
             <h3>{media.name}</h3>
@@ -27,4 +23,4 @@ class SeriesCard extends Component {
   }
 }
 
-export default SeriesCard;
+export default SeriesResult;
